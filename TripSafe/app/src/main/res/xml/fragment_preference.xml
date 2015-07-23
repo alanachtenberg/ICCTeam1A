@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <PreferenceCategory android:title="Check-in Grace Period">
+        <com.sabre.tripsafe.preferences.NumberPreference
+            android:key="grace_before_preference"
+            android:title="Before"
+            android:dialogMessage="@string/grace_before"
+            android:defaultValue="10"
+            />
+        <com.sabre.tripsafe.preferences.NumberPreference
+            android:key="grace_after_preference"
+            android:title="After"
+            android:dialogMessage="@string/grace_after"
+            android:defaultValue="5"
+            />
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="Security">
+        <EditTextPreference
+            android:key="finger_preference"
+            android:title="Normal Print"
+            android:inputType="text"
+            android:summary="@string/finger_checkin"
+            />
+        <EditTextPreference
+            android:key="finger_emergency_preference"
+            android:title="Emergency Print"
+            android:inputType="text"
+            android:summary="@string/finger_emergency"
+            />
+
+    </PreferenceCategory>
+</PreferenceScreen>
