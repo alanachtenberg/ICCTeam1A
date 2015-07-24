@@ -7,29 +7,71 @@ import android.util.AttributeSet;
 import android.view.View;
 import android.widget.NumberPicker;
 
-public class NumberPreference extends DialogPreference {
-    public int maxValue = 60;
-    public int minValue = 1;
+import com.sabre.tripsafe.R;
 
-    private int number = 0;
+public class NumberPreference extends DialogPreference {
+    private int mMaxValue;
+    private int mMinValue;
+    private String mValueDescription;
+
+
     private NumberPicker picker = null;
 
     public NumberPreference(Context ctxt, AttributeSet attrs) {
         super(ctxt, attrs);
-        setPositiveButtonText("Set");
-        setNegativeButtonText("Cancel");
+        TypedArray attributes = getContext().getTheme().obtainStyledAttributes(attrs,R.styleable.NumberPreference,0,0);
+        try {
+            setMaxValue(attributes.getInteger(R.styleable.NumberPreference_maxValue, 60));
+            setMinValue(attributes.getInteger(R.styleable.NumberPreference_minValue, 1));
+            setValueDescription(attributes.getString(R.styleable.NumberPreference_valueDescription));
+            setPositiveButtonText("Set");
+            setNegativeButtonText("Cancel");
+        }
+        finally {
+            attributes.recycle();
+        }
     }
 
-    public String getValue(){
-        return Integer.toString(number);
+    public int getValue(){
+        if (picker!=null)
+            return picker.getValue();
+        else
+            return -1;
+    }
+
+    public void setMaxValue(int maxValue){
+        mMaxValue=maxValue;
+        if (picker!=null){
+            picker.setMaxValue(mMaxValue);
+        }
+    }
+    public int getMaxValue(){
+        return mMaxValue;
+    }
+    public void setMinValue(int minValue){
+        mMinValue=minValue;
+        if (picker!=null){
+            picker.setMinValue(mMaxValue);
+        }
+    }
+    public int getMinValue(){
+        return mMinValue;
+    }
+
+    public void setValueDescription(String valueDescription){
+        mValueDescription=valueDescription;
+    }
+
+    public String getValueDescription(){
+        return mValueDescription;
     }
 
 
     @Override
     protected View onCreateDialogView() {
         picker = new NumberPicker(getContext());
-        picker.setMaxValue(maxValue);
-        picker.setMinValue(minValue);
+        picker.setMaxValue(this.getMaxValue());
+        picker.setMinValue(this.getMinValue());
         return (picker);
     }
 
@@ -43,7 +85,7 @@ public class NumberPreference extends DialogPreference {
     protected void onDialogClosed(boolean positiveResult) {
         super.onDialogClosed(positiveResult);
         if (positiveResult) {
-            number = picker.getValue();
+            int number = picker.getValue();
             if (callChangeListener(number)) {
                 persistString(Integer.toString(number));
             }
@@ -68,7 +110,6 @@ public class NumberPreference extends DialogPreference {
         } else {
             numberString = defaultValue.toString();
         }
-        number = Integer.parseInt(numberString);
-        setSummary(getValue()+" min");
+        setSummary(numberString+" "+getValueDescription());
     }
 }

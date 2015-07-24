@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <PreferenceCategory android:title="Check-in Grace Period">
         <com.sabre.tripsafe.preferences.NumberPreference
@@ -7,29 +8,35 @@
             android:title="Before"
             android:dialogMessage="@string/grace_before"
             android:defaultValue="10"
-
+            app:maxValue="30"
+            app:minValue="1"
+            app:valueDescription="min"
             />
         <com.sabre.tripsafe.preferences.NumberPreference
             android:key="grace_after_preference"
             android:title="After"
             android:dialogMessage="@string/grace_after"
             android:defaultValue="5"
+            app:maxValue="30"
+            app:minValue="1"
+            app:valueDescription="min"
             />
     </PreferenceCategory>
 
     <PreferenceCategory android:title="Location">
         <CheckBoxPreference
             android:key="location_required"
-            android:title="Before"
-            android:dialogMessage="Check-in Location Required"
+            android:title="Location Required"
             android:defaultValue="false"
             />
         <com.sabre.tripsafe.preferences.NumberPreference
             android:key="location_distance"
-            android:title="After"
-            android:dialogMessage="@string/grace_after"
+            android:title="Maximum Distance"
+            android:dialogMessage="Maximum Distance from specified location, that check-in is allowed"
             android:defaultValue="5"
-
+            app:maxValue="10"
+            app:minValue="1"
+            app:valueDescription="miles"
             />
     </PreferenceCategory>
 
