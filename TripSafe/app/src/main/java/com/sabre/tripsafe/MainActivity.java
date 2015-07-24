@@ -53,6 +53,9 @@ public class MainActivity extends Activity
             case 2:
                 fragment=SettingsFragment.newInstance();
                 break;
+            case 3:
+                fragment=DeveloperFragment.newInstance();
+                break;
         }
         // update the main content by replacing fragments
         FragmentManager fragmentManager = getFragmentManager();
@@ -71,6 +74,9 @@ public class MainActivity extends Activity
                 break;
             case 3:
                 mTitle = getString(R.string.title_settings);
+                break;
+            case 4:
+                mTitle = "Developer Tools";
                 break;
         }
     }
