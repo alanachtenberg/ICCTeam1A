@@ -7,12 +7,29 @@
             android:title="Before"
             android:dialogMessage="@string/grace_before"
             android:defaultValue="10"
+
             />
         <com.sabre.tripsafe.preferences.NumberPreference
             android:key="grace_after_preference"
             android:title="After"
             android:dialogMessage="@string/grace_after"
             android:defaultValue="5"
+            />
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="Location">
+        <CheckBoxPreference
+            android:key="location_required"
+            android:title="Before"
+            android:dialogMessage="Check-in Location Required"
+            android:defaultValue="false"
+            />
+        <com.sabre.tripsafe.preferences.NumberPreference
+            android:key="location_distance"
+            android:title="After"
+            android:dialogMessage="@string/grace_after"
+            android:defaultValue="5"
+
             />
     </PreferenceCategory>
 

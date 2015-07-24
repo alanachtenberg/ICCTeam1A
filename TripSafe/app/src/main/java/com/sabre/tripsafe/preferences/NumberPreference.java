@@ -8,8 +8,8 @@ import android.view.View;
 import android.widget.NumberPicker;
 
 public class NumberPreference extends DialogPreference {
-    private static int MAX_VALUE = 60;
-    private static int MIN_VALUE = 1;
+    public int maxValue = 60;
+    public int minValue = 1;
 
     private int number = 0;
     private NumberPicker picker = null;
@@ -28,8 +28,8 @@ public class NumberPreference extends DialogPreference {
     @Override
     protected View onCreateDialogView() {
         picker = new NumberPicker(getContext());
-        picker.setMaxValue(MAX_VALUE);
-        picker.setMinValue(MIN_VALUE);
+        picker.setMaxValue(maxValue);
+        picker.setMinValue(minValue);
         return (picker);
     }
 
