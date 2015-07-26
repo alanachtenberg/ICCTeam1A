@@ -11,15 +11,16 @@ import android.os.Bundle;
  */
 public class CheckInDialogFragment extends DialogFragment {
     private static String DIALOGUE_TITLE="Check-in";
-    private static String MESSAGE="Your scheduled check-in is due in 5 minutes";
+    private static String MESSAGE="Your scheduled check-in is due in %d minutes";
     private static String POS_BUTTON="Start";
     private static String NEG_BUTTON="Cancel";
+    private static int minutes=5;//minutes before checkIn
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setTitle(DIALOGUE_TITLE);
-        builder.setMessage(MESSAGE);
+        builder.setMessage(String.format(MESSAGE,minutes));
 
         builder.setPositiveButton(POS_BUTTON,new DialogInterface.OnClickListener() {
             @Override

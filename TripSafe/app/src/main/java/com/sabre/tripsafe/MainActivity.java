@@ -3,6 +3,7 @@ package com.sabre.tripsafe;
 import android.app.Activity;
 
 import android.app.ActionBar;
+import android.app.AlarmManager;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.os.Bundle;
@@ -14,6 +15,8 @@ import com.sabre.tripsafe.preferences.SettingsFragment;
 
 public class MainActivity extends Activity
         implements NavigationDrawerFragment.NavigationDrawerCallbacks {
+
+    public static final String TAG = "TRIP_SAFE";
 
     /**
      * Fragment managing the behaviors, interactions and presentation of the navigation drawer.

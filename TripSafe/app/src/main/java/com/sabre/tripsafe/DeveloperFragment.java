@@ -1,11 +1,7 @@
 package com.sabre.tripsafe;
 
-import android.app.Activity;
 import android.app.Fragment;
-import android.bluetooth.BluetoothAdapter;
-import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -33,30 +29,41 @@ public class DeveloperFragment extends Fragment {
         return fragment;
     }
 
-    public DeveloperFragment(){
+    public DeveloperFragment() {
         //empty public constructor
     }
+
     @Override
-    public void onCreate(Bundle savedInstanceState){
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
     }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        view=inflater.inflate(R.layout.fragment_developer, container, false);
+        view = inflater.inflate(R.layout.fragment_developer, container, false);
 
         showReminderButton = (Button) view.findViewById(R.id.developer_show_reminder);
         showReminderButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                CheckInManager.showReminder(getActivity().getFragmentManager());
+                CheckInManager.showReminder(getActivity());
             }
         });
 
         dummy = (Button) view.findViewById(R.id.developer_dummy);
 
+        dummy.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                CheckInManager.showReminder(getActivity());
+            }
+        });
+
         return view;
     }
+
 
 }

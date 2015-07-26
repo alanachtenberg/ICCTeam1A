@@ -3,6 +3,8 @@ package com.sabre.tripsafe.checkin;
 import com.sabre.tripsafe.checkin.time.Period;
 import com.sabre.tripsafe.checkin.time.Time;
 
+import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.regex.Pattern;
 
 /**
@@ -20,53 +22,73 @@ public class CheckInPreferences {
     private Time time;
 
 
-    public CheckInPreferences(Time time, Period period, boolean reminderEnabled){
-        this.time=time; this.period=period;
-        this.reminderEnabled=reminderEnabled;
+    public CheckInPreferences(Time time, Period period, boolean reminderEnabled) {
+        this.time = time;
+        this.period = period;
+        this.reminderEnabled = reminderEnabled;
     }
 
-    public boolean setEmailAddress(String emailAddress){
-        if(validateEmail(emailAddress)) {
+    public boolean setEmailAddress(String emailAddress) {
+        if (validateEmail(emailAddress)) {
             this.emailAddress = emailAddress;
             return true;
         }
         return false;
     }
-    public String getEmailAddress(){
+
+    public String getEmailAddress() {
         return emailAddress;
     }
 
-    public boolean setPhoneNumber(String phoneNumber){
-        if(validatePhone(phoneNumber)) {
+    public boolean setPhoneNumber(String phoneNumber) {
+        if (validatePhone(phoneNumber)) {
             this.phoneNumber = emailAddress;
             return true;
         }
         return false;
     }
-    public String getPhoneNumber(){
+
+    public String getPhoneNumber() {
         return phoneNumber;
     }
 
-    public Time getTime(){
+    public Time getTime() {
         return time;
     }
 
-    public Period getPeriod(){
+    public Period getPeriod() {
         return period;
     }
 
-    public boolean isReminderEnabled(){
+    public boolean isReminderEnabled() {
         return reminderEnabled;
     }
 
-
-    private static boolean validatePhone(String phone){
-        phone.trim();
-        return Pattern.matches("\\d\\d\\d\\-\\d\\d\\d\\-\\d\\d\\d\\d",phone);
+    /*
+    *Returns Calendar objects that represent time for a check in once per day during the
+    * Check-in period
+    */
+    public ArrayList<Calendar> generateCalendars() {
+        ArrayList<Calendar> calendars = new ArrayList<Calendar>();
+        Calendar current = period.start;
+        current.set(Calendar.HOUR_OF_DAY, time.getHour());//HOUR_OF_DAY is in military time
+        current.set(Calendar.MINUTE, time.getMinute());
+        while (period.contains(current)) {
+            calendars.add((Calendar) current.clone());
+            current.add(Calendar.DAY_OF_MONTH, 1);
+        }
+        return calendars;
     }
-    private static boolean validateEmail(String email){
+
+
+    private static boolean validatePhone(String phone) {
+        phone.trim();
+        return Pattern.matches("\\d\\d\\d\\-\\d\\d\\d\\-\\d\\d\\d\\d", phone);
+    }
+
+    private static boolean validateEmail(String email) {
         email.trim();
-        return Pattern.matches("[\\_0\\d\\w]+\\@[\\_\\d\\.\\w]+\\.(com|edu|org)",email);
+        return Pattern.matches("[\\_0\\d\\w]+\\@[\\_\\d\\.\\w]+\\.(com|edu|org)", email);
     }
 
 }
