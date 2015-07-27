@@ -30,8 +30,8 @@ public class MissedEvent extends AbstractCheckInEvent {
     private Period createCheckInPeriod(){
         Calendar start = (Calendar)getBaseCalendar().clone();
         Calendar end = (Calendar)getBaseCalendar().clone();
-        start.add(Calendar.MINUTE,-gracePeriodBefore);//negative to change time to before the base
-        end.add(Calendar.MINUTE,gracePeriodAfter);
+        start.add(Calendar.SECOND,-gracePeriodBefore);//negative to change time to before the base
+        end.add(Calendar.SECOND,gracePeriodAfter);
         return  new Period(start,end);
     }
 
@@ -39,7 +39,7 @@ public class MissedEvent extends AbstractCheckInEvent {
     @Override
     protected Calendar createAdjustedCalendar() {
         Calendar calendar = (Calendar) getBaseCalendar().clone();
-        calendar.add(Calendar.MINUTE, gracePeriodAfter);
+        calendar.add(Calendar.SECOND, gracePeriodAfter);
         return calendar;
     }
 

@@ -11,7 +11,7 @@ import android.os.Bundle;
  */
 public class CheckInDialogFragment extends DialogFragment {
     private static String DIALOGUE_TITLE="Check-in";
-    private static String MESSAGE="Your scheduled check-in is due in %d minutes";
+    private static String MESSAGE="Your scheduled check-in is due in %d seconds";
     private static String POS_BUTTON="Start";
     private static String NEG_BUTTON="Cancel";
     private static int seconds=3;//seconds before checkIn
