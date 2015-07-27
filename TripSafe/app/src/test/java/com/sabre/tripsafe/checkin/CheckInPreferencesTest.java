@@ -17,11 +17,11 @@ import static junit.framework.Assert.assertSame;
  * Created by Alan on 7/25/2015.
  */
 public class CheckInPreferencesTest {
-    private static final Time time = new Time(12, 30);//12:30 pm
+    private static final Time time = new Time(0, 30);// 30 seoncds
     private static CheckInPreferences checkInPreferences;
 
-    private static final Calendar today = Calendar.getInstance();
-    private static Calendar tomorrow;
+    private static final Calendar now = Calendar.getInstance();
+    private static Calendar fiveMinutesLater;
 
     private static final String[] VALID_EMAILS = {"alanachtenberg@yahoo.com", "alan_acHtenberG1234@as.sabre.yahoo.edu", "1234__Alan@apache.org"};
     private static final String[] INVALID_EMAILS = {"alanachtenberg@yahoo.", "alan_acHtenberG1234@as.sabre.yahoo.mmm", "1234_@_Alan@apache.org"};
@@ -35,29 +35,29 @@ public class CheckInPreferencesTest {
 
     private static void initCheckin(Time time, boolean remind) {
         final Calendar today = Calendar.getInstance();
-        today.set(Calendar.HOUR_OF_DAY, time.getHour());//have to manually set the time of day, so that # of generated calendars is not ambiguous
-        today.set(Calendar.MINUTE, time.getMinute());
-        tomorrow = (Calendar) today.clone();
-        tomorrow.add(Calendar.DAY_OF_MONTH, 1);
-        Period period = new Period(today, tomorrow);
+        today.set(Calendar.SECOND, time.getSecond());
+        fiveMinutesLater = (Calendar) today.clone();
+        fiveMinutesLater.add(Calendar.MINUTE, 5);
+        Period period = new Period(today, fiveMinutesLater);
         checkInPreferences = new CheckInPreferences(time, period, remind);
     }
 
     @Test
     public void createCheckInEvents() {
         ArrayList<Calendar> calendars = (ArrayList<Calendar>) checkInPreferences.generateCalendars();
-        assertEquals(2, calendars.size());
-        validateTime(today, calendars.get(0));
-        validateTime(tomorrow, calendars.get(1));
+        assertEquals(6, calendars.size());
+        validateTime(now, calendars.get(0));
+        validateTime(fiveMinutesLater, calendars.get(5));
     }
 
     private static void validateTime(Calendar expected, Calendar actual) {
         assertEquals(expected.get(Calendar.YEAR), actual.get(Calendar.YEAR));
         assertEquals(expected.get(Calendar.MONTH), actual.get(Calendar.MONTH));
         assertEquals(expected.get(Calendar.DAY_OF_MONTH), actual.get(Calendar.DAY_OF_MONTH));
+        assertEquals(expected.get(Calendar.HOUR_OF_DAY), actual.get(Calendar.HOUR_OF_DAY));
+        assertEquals(expected.get(Calendar.MINUTE), actual.get(Calendar.MINUTE));
 
-        assertEquals(time.getHour(), actual.get(Calendar.HOUR_OF_DAY));
-        assertEquals(time.getMinute(), actual.get(Calendar.MINUTE));
+        assertEquals(time.getSecond(), actual.get(Calendar.SECOND));
     }
 
     @Test

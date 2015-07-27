@@ -14,13 +14,13 @@ public class CheckInDialogFragment extends DialogFragment {
     private static String MESSAGE="Your scheduled check-in is due in %d minutes";
     private static String POS_BUTTON="Start";
     private static String NEG_BUTTON="Cancel";
-    private static int minutes=5;//minutes before checkIn
+    private static int seconds=3;//seconds before checkIn
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setTitle(DIALOGUE_TITLE);
-        builder.setMessage(String.format(MESSAGE,minutes));
+        builder.setMessage(String.format(MESSAGE,seconds));
 
         builder.setPositiveButton(POS_BUTTON,new DialogInterface.OnClickListener() {
             @Override
