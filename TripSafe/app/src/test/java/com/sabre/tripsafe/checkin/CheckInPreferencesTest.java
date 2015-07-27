@@ -28,7 +28,7 @@ public class CheckInPreferencesTest {
 
     private static void initCheckin(Time time, boolean remind) {
         final Calendar today = Calendar.getInstance();
-        today.set(Calendar.HOUR_OF_DAY,time.getHour());//have to manually set the time of day, so that internal comparator for calendar is not ambiguous
+        today.set(Calendar.HOUR_OF_DAY,time.getHour());//have to manually set the time of day, so that # of generated calendars is not ambiguous
         today.set(Calendar.MINUTE,time.getMinute());
         tomorrow = (Calendar) today.clone();
         tomorrow.add(Calendar.DAY_OF_MONTH, 1);

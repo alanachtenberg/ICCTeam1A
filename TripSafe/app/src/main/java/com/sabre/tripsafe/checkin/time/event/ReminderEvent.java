@@ -14,7 +14,7 @@ public class ReminderEvent extends AbstractCheckInEvent {
     }
 
     @Override
-    public Calendar createAdjustedCalendar() {
+    protected Calendar createAdjustedCalendar() {
         Calendar calendar = (Calendar) getBaseCalendar().clone();
         calendar.add(Calendar.MINUTE, -5);
         return calendar;

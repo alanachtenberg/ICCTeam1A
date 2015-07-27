@@ -1,14 +1,12 @@
 package com.sabre.tripsafe;
 
-import android.app.Activity;
-
 import android.app.ActionBar;
-import android.app.AlarmManager;
+import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.os.Bundle;
-import android.view.Menu;
 import android.support.v4.widget.DrawerLayout;
+import android.view.Menu;
 
 import com.sabre.tripsafe.preferences.SettingsFragment;
 

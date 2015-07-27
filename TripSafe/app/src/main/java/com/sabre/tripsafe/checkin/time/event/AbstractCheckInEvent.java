@@ -43,6 +43,6 @@ public abstract class AbstractCheckInEvent {
         return adjustedCalendar;
     }
 
-    public abstract Calendar createAdjustedCalendar();
+    protected abstract Calendar createAdjustedCalendar();
 
 }

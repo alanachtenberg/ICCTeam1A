@@ -10,14 +10,10 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
-import com.sabre.tripsafe.R;
-import com.sabre.tripsafe.checkin.receivers.MissedCheckinReciever;
 import com.sabre.tripsafe.checkin.receivers.ReminderReciever;
-import com.sabre.tripsafe.checkin.time.Period;
 import com.sabre.tripsafe.checkin.time.event.EventComparator;
 import com.sabre.tripsafe.checkin.time.event.MissedEvent;
 import com.sabre.tripsafe.checkin.time.event.ReminderEvent;
-import com.sabre.tripsafe.checkin.time.Time;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -80,11 +76,11 @@ public class CheckInManager {
     public static void updateEventsOnCheckIn(Activity activity, Calendar calendar) {
         try{
             LoadContext(activity);
+            //TODO
         }
         finally {
             unLoadContext();
         }
-        //TODO
     }
 
     private static void createReminderEvent(Calendar calendar) {
