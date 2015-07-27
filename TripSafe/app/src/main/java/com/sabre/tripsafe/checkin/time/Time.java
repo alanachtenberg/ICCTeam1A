@@ -9,38 +9,38 @@ import com.sabre.tripsafe.MainActivity;
  */
 public class Time {
 
-    private int hour;
     private int minute;
+    private int second;
 
     /*
     *@param h hours in military time
     * @param m minutes
     */
-    public Time(int h, int m) {
-        hour = h;
+    public Time(int m, int s) {
         minute = m;
+        second = s;
         if (!validate()){
-            hour=-1;
             minute=-1;
+            second=-1;
         }
     }
 
     private boolean validate() {
-        if (0 > hour || hour > 23) {
-            Log.e(MainActivity.TAG, String.format("Invalid time set, hour is out of range. value =%d", hour));
+        if (0 > minute || minute > 59) {
+            Log.e(MainActivity.TAG, String.format("Invalid time set, minute is out of range. value =%d", minute));
             return false;
         }
-        if (0 > minute || minute > 59) {
-            Log.e(MainActivity.TAG, String.format("Invalid time set, minute is out of range. value=%d", minute));
+        if (0 > second || second > 59) {
+            Log.e(MainActivity.TAG, String.format("Invalid time set, second is out of range. value=%d", second));
             return false;
         }
         return true;
     }
 
-    public int getHour(){
-        return hour;
-    }
     public int getMinute(){
         return minute;
+    }
+    public int getSecond(){
+        return second;
     }
 }

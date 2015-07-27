@@ -22,11 +22,11 @@ public class CheckInPreferences {
     private String phoneNumber;
     private boolean reminderEnabled;
     private Period period;
-    private Time time;
+    private Time checkInTime;
 
 
-    public CheckInPreferences(Time time, Period period, boolean reminderEnabled) {
-        this.time = time;
+    public CheckInPreferences(Time checkInTime, Period period, boolean reminderEnabled) {
+        this.checkInTime = checkInTime;
         this.period = period;
         this.reminderEnabled = reminderEnabled;
     }
@@ -59,8 +59,8 @@ public class CheckInPreferences {
         return phoneNumber;
     }
 
-    public Time getTime() {
-        return time;
+    public Time getCheckInTime() {
+        return checkInTime;
     }
 
     public Period getPeriod() {
@@ -78,11 +78,10 @@ public class CheckInPreferences {
     public ArrayList<Calendar> generateCalendars() {
         ArrayList<Calendar> calendars = new ArrayList<Calendar>();
         Calendar current = period.start;
-        current.set(Calendar.HOUR_OF_DAY, time.getHour());//HOUR_OF_DAY is in military time
-        current.set(Calendar.MINUTE, time.getMinute());
+        current.set(Calendar.SECOND, checkInTime.getSecond());
         while (period.contains(current)) {
             calendars.add((Calendar) current.clone());
-            current.add(Calendar.DAY_OF_MONTH, 1);
+            current.add(Calendar.MINUTE, 1);
         }
         return calendars;
     }
