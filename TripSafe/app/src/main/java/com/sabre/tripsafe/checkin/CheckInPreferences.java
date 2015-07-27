@@ -1,5 +1,8 @@
 package com.sabre.tripsafe.checkin;
 
+import android.util.Log;
+
+import com.sabre.tripsafe.MainActivity;
 import com.sabre.tripsafe.checkin.time.Period;
 import com.sabre.tripsafe.checkin.time.Time;
 
@@ -33,6 +36,8 @@ public class CheckInPreferences {
             this.emailAddress = emailAddress;
             return true;
         }
+        System.out.println(String.format("Attempt to set invalid email address. value=%s", emailAddress));
+        emailAddress = null;
         return false;
     }
 
@@ -45,6 +50,8 @@ public class CheckInPreferences {
             this.phoneNumber = emailAddress;
             return true;
         }
+        System.out.println( String.format("Attempt to set invalid phone number. value=%s", phoneNumber));
+        phoneNumber = null;
         return false;
     }
 
@@ -83,12 +90,12 @@ public class CheckInPreferences {
 
     private static boolean validatePhone(String phone) {
         phone.trim();
-        return Pattern.matches("\\d\\d\\d\\-\\d\\d\\d\\-\\d\\d\\d\\d", phone);
+        return Pattern.matches("(1\\-)?\\d\\d\\d\\-\\d\\d\\d\\-\\d\\d\\d\\d", phone);
     }
 
     private static boolean validateEmail(String email) {
         email.trim();
-        return Pattern.matches("[\\_0\\d\\w]+\\@[\\_\\d\\.\\w]+\\.(com|edu|org)", email);
+        return Pattern.matches("[\\_\\d\\w]+\\@[\\_\\d\\.\\w]+\\.(com|edu|org)", email);
     }
 
 }
