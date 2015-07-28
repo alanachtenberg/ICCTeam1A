@@ -18,7 +18,7 @@
             android:dialogMessage="@string/grace_after"
             android:defaultValue="5"
             app:maxValue="30"
-            app:minValue="10"
+            app:minValue="5"
             app:valueDescription="seconds"
             />
     </PreferenceCategory>

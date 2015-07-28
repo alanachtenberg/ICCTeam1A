@@ -39,8 +39,8 @@ public class CheckInManager {
         context = activity.getApplicationContext();
         alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
-        graceAfterPref = sharedPreferences.getInt("grace_after_preference",0);
-        graceBeforePref = sharedPreferences.getInt("grace_before_preference",0);
+        graceAfterPref = (int)sharedPreferences.getInt("grace_after_preference",-1);
+        graceBeforePref = (int)sharedPreferences.getInt("grace_before_preference",-1);
     }
 
     private static void unLoadContext() {
@@ -85,9 +85,9 @@ public class CheckInManager {
 
     private static void createReminderEvent(Calendar calendar) {
         ReminderEvent event = new ReminderEvent(calendar);
-        Intent intent = new Intent(context, ReminderReciever.class);
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(context, event.getId(), intent, PendingIntent.FLAG_UPDATE_CURRENT);
-        alarmManager.set(AlarmManager.RTC, event.getAdjustedCalendar().getTimeInMillis(), pendingIntent);
+        Intent intent = new Intent(ReminderReciever.INTENT_STRING);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 0, intent, 0);
+        alarmManager.setExact(AlarmManager.RTC_WAKEUP, event.getAdjustedCalendar().getTimeInMillis(), pendingIntent);
     }
 
     private static void createMissedCheckInEvent(Calendar calendar) {

@@ -8,6 +8,11 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.sabre.tripsafe.checkin.CheckInManager;
+import com.sabre.tripsafe.checkin.CheckInPreferences;
+import com.sabre.tripsafe.checkin.time.Period;
+import com.sabre.tripsafe.checkin.time.Time;
+
+import java.util.Calendar;
 
 /**
  * Created by Alan on 7/24/2015.
@@ -20,7 +25,7 @@ public class DeveloperFragment extends Fragment {
 
     private View view;
     private Button showReminderButton;
-    private Button dummy;
+    private Button scheduleCheckIn;
 
     public static DeveloperFragment newInstance() {
         DeveloperFragment fragment = new DeveloperFragment();
@@ -52,13 +57,16 @@ public class DeveloperFragment extends Fragment {
             }
         });
 
-        dummy = (Button) view.findViewById(R.id.developer_dummy);
+        scheduleCheckIn = (Button) view.findViewById(R.id.developer_test_schedule_checkin);
 
-        dummy.setOnClickListener(new View.OnClickListener() {
+        scheduleCheckIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                CheckInManager.showReminder(getActivity());
+                Calendar now=Calendar.getInstance();
+                Calendar oneMinuteFromNow = (Calendar)now.clone();
+                oneMinuteFromNow.add(Calendar.MINUTE,1);
+                CheckInPreferences preferences = new CheckInPreferences(new Time(0,59),new Period(now,oneMinuteFromNow),true);
+                CheckInManager.createCheckInEvents(getActivity(), preferences);
             }
         });
 

@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
 import android.view.Menu;
 
+import com.sabre.tripsafe.checkin.receivers.ReminderReciever;
 import com.sabre.tripsafe.preferences.SettingsFragment;
 
 
@@ -39,6 +40,7 @@ public class MainActivity extends Activity
         mNavigationDrawerFragment.setUp(
                 R.id.navigation_drawer,
                 (DrawerLayout) findViewById(R.id.drawer_layout));
+        //registerReceiver(new ReminderReciever(),null); now in manifest
     }
 
     @Override

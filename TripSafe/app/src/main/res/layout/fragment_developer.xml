@@ -14,10 +14,10 @@
             android:text="Show Reminder"
             />
         <Button
-            android:id="@+id/developer_dummy"
+            android:id="@+id/developer_test_schedule_checkin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="dummy"
+            android:text="Schedule Check-in"
             />
 
 

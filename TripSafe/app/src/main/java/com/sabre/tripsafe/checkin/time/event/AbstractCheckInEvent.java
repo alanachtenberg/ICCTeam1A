@@ -7,7 +7,7 @@ import java.util.Calendar;
  */
 public abstract class AbstractCheckInEvent {
 
-    private int id = 0;
+    private long id = 0;
     private String idString = "";
 
     private Calendar calendar;
@@ -16,18 +16,10 @@ public abstract class AbstractCheckInEvent {
     protected AbstractCheckInEvent(Calendar calendar) {
         this.calendar = calendar;
         this.adjustedCalendar = createAdjustedCalendar();
-        createID();
+        id = calendar.getTimeInMillis();
     }
 
-    private void createID() {
-        idString = Integer.toString(calendar.get(Calendar.YEAR))
-                + Integer.toString(calendar.get(Calendar.DAY_OF_YEAR))
-                + Integer.toString(calendar.get(Calendar.HOUR_OF_DAY))
-                + Integer.toString(calendar.get(Calendar.MINUTE));
-        id = Integer.parseInt(idString);// unique... enough, for our purposes at least
-    }
-
-    public int getId() {
+    public long getId() {
         return id;
     }
 

@@ -9,6 +9,6 @@ public class EventComparator implements Comparator<AbstractCheckInEvent> {
 
     @Override
     public int compare(AbstractCheckInEvent lhs, AbstractCheckInEvent rhs) {
-        return Integer.compare(lhs.getId(),rhs.getId());
+        return Long.compare(lhs.getId(),rhs.getId());
     }
 }
