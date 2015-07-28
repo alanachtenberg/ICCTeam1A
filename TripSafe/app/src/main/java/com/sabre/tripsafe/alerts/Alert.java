@@ -9,13 +9,17 @@ interface Alert {
         NULL, EMAIL, TEXT
     }
 
-    int threshold = -1;
+
     AlertType alertType = AlertType.NULL;
+    boolean enabled = false;
+    int threshold = -1;
 
-    int getThreshold();
     AlertType getAlertType();
+    boolean getEnabled();
+    int getThreshold();
 
-    void setThreshold(int threshold);
     void setAlertType(AlertType alertType);
+    void setEnabled(boolean enabled);
+    void setThreshold(int threshold);
 
 }

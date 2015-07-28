@@ -5,13 +5,10 @@ package com.sabre.tripsafe.alerts;
  */
 public class TextAlert implements Alert {
 
-    int threshold = -1;
-    AlertType alertType = AlertType.TEXT;
-
-    @Override
-    public int getThreshold() {
-        return threshold;
-    }
+    private AlertType alertType;
+    private boolean enabled;
+    private int threshold;
+    private String phoneNumber;
 
     @Override
     public AlertType getAlertType() {
@@ -19,13 +16,28 @@ public class TextAlert implements Alert {
     }
 
     @Override
-    public void setThreshold(int threshold) {
-        this.threshold = threshold;
+    public boolean getEnabled() {
+        return enabled;
+    }
+
+    @Override
+    public int getThreshold() {
+        return threshold;
     }
 
     @Override
     public void setAlertType(AlertType alertType) {
         this.alertType = alertType;
+    }
+
+    @Override
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
+    }
+
+    @Override
+    public void setThreshold(int threshold) {
+        this.threshold = threshold;
     }
 
 }
