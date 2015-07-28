@@ -4,6 +4,9 @@ import android.util.Log;
 
 import com.sabre.tripsafe.MainActivity;
 
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+
 /**
  * Created by Alan on 7/25/2015.
  */
@@ -42,5 +45,11 @@ public class Time {
     }
     public int getSecond(){
         return second;
+    }
+
+    public static Time getDifference(Calendar now, Calendar later){
+        long diffInMillis = later.getTimeInMillis()-now.getTimeInMillis();
+        int diffInSeconds = (int)(diffInMillis/1000);
+        return new Time(diffInSeconds/60,diffInSeconds%60);
     }
 }

@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
 import android.view.Menu;
 
+import com.sabre.tripsafe.checkin.CheckInManager;
 import com.sabre.tripsafe.checkin.receivers.ReminderReciever;
 import com.sabre.tripsafe.preferences.SettingsFragment;
 
@@ -96,6 +97,13 @@ public class MainActivity extends Activity
         actionBar.setTitle(mTitle);
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        if (getIntent().getAction().endsWith("showReminder")) {
+            CheckInManager.showReminder(this);
+        }
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

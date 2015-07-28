@@ -21,6 +21,11 @@
                 <action android:name="com.sabre.tripsafe.reminder"/>
             </intent-filter>
         </receiver>
+        <receiver android:name=".checkin.receivers.MissedCheckinReciever" android:enabled="true">
+            <intent-filter>
+                <action android:name="com.sabre.tripsafe.missed"/>
+            </intent-filter>
+        </receiver>
     </application>
 
 </manifest>
