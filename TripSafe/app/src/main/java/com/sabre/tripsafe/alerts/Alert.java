@@ -5,15 +5,14 @@ package com.sabre.tripsafe.alerts;
  */
 interface Alert {
 
-    AlertType alertType = AlertType.NULL;
+    AlertType alertType = AlertType.BASIC;
     boolean enabled = false;
-    int threshold = -1;
+    int threshold = 1;
 
     AlertType getAlertType();
     boolean getEnabled();
     int getThreshold();
 
-    void setAlertType(AlertType alertType);
     void setEnabled(boolean enabled);
     void setThreshold(int threshold);
 

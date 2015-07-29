@@ -11,7 +11,7 @@ public class Alerts {
         else if (newAlertType == AlertType.TEXT)
             return new TextAlert(alert);
         else
-            return new NullAlert(alert);
+            return new BasicAlert(alert);
     }
 
 }
