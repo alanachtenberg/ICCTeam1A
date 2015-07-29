@@ -1,21 +1,23 @@
 package com.sabre.tripsafe.alerts;
 
-import android.content.Context;
-import android.view.View;
+import android.view.LayoutInflater;
+import android.view.ViewGroup;
+import android.widget.RelativeLayout;
+
+import com.sabre.tripsafe.R;
 
 /**
  * Created by rsitisr on 2015-07-28.
  */
-public class BasicOption extends View implements Option {
+public class BasicOption extends RelativeLayout implements Option {
 
     private OptionType optionType;
     private boolean enabled;
     private int threshold;
 
-    public BasicOption(Context context, boolean enabled, int threshold) {
-        super(context);
-        this.enabled = enabled;
-        this.threshold = threshold;
+    public static BasicOption inflate(ViewGroup parent) {
+        BasicOption option = (BasicOption) LayoutInflater.from(parent.getContext()).inflate(R.layout.view_basic_option, parent, false);
+        return option;
     }
 
     @Override
