@@ -9,8 +9,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
+import android.util.Log;
 
+import com.sabre.tripsafe.checkin.receivers.MissedCheckinReciever;
 import com.sabre.tripsafe.checkin.receivers.ReminderReciever;
+import com.sabre.tripsafe.checkin.time.Time;
 import com.sabre.tripsafe.checkin.time.event.EventComparator;
 import com.sabre.tripsafe.checkin.time.event.MissedEvent;
 import com.sabre.tripsafe.checkin.time.event.ReminderEvent;
@@ -19,6 +22,8 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import java.util.PriorityQueue;
+
+import static com.sabre.tripsafe.MainActivity.TAG;
 
 /**
  * Created by Alan on 7/23/2015.
@@ -39,8 +44,8 @@ public class CheckInManager {
         context = activity.getApplicationContext();
         alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
-        graceAfterPref = (int)sharedPreferences.getInt("grace_after_preference",-1);
-        graceBeforePref = (int)sharedPreferences.getInt("grace_before_preference",-1);
+        graceAfterPref = (int) sharedPreferences.getInt("grace_after_preference", -1);
+        graceBeforePref = (int) sharedPreferences.getInt("grace_before_preference", -1);
     }
 
     private static void unLoadContext() {
@@ -65,7 +70,7 @@ public class CheckInManager {
                 if (checkInPreferences.isReminderEnabled()) {
                     createReminderEvent(calendar);
                 }
-                createMissedCheckInEvent(calendar);
+                createMissedCheckInEvent(calendar, checkInPreferences);
             }
             return calendars;
         } finally {
@@ -74,11 +79,10 @@ public class CheckInManager {
     }
 
     public static void updateEventsOnCheckIn(Activity activity, Calendar calendar) {
-        try{
+        try {
             LoadContext(activity);
             //TODO
-        }
-        finally {
+        } finally {
             unLoadContext();
         }
     }
@@ -88,17 +92,34 @@ public class CheckInManager {
         Intent intent = new Intent(ReminderReciever.INTENT_STRING);
         PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 0, intent, 0);
         alarmManager.setExact(AlarmManager.RTC_WAKEUP, event.getAdjustedCalendar().getTimeInMillis(), pendingIntent);
+        reminderEvents.add(event);
     }
 
-    private static void createMissedCheckInEvent(Calendar calendar) {
+    private static void createMissedCheckInEvent(Calendar calendar, CheckInPreferences preferences) {
+        MissedEvent event = new MissedEvent(calendar, graceBeforePref, graceAfterPref, preferences);
+        Intent intent = new Intent(MissedCheckinReciever.INTENT_STRING);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 0, intent, 0);
+        alarmManager.setExact(AlarmManager.RTC_WAKEUP, event.getAdjustedCalendar().getTimeInMillis(), pendingIntent);
+        logCheckInInfo(event);
+        missedEvents.add(event);
+    }
+
+    private static void cancelReminderEvent() {
         //TODO
     }
 
-    private static  void cancelReminderEvent(){
+    private static void cancelMissedCheckInEvent() {
         //TODO
     }
-    private static void cancelMissedCheckInEvent(){
-        //TODO
+
+    private static void logCheckInInfo(MissedEvent event) {
+        Calendar now = Calendar.getInstance();
+        Time baseDiff = Time.getDifference(now, event.getBaseCalendar());
+        Time startDiff = Time.getDifference(now, event.getStartOfCheckInPeriod());
+        Time endDiff = Time.getDifference(now, event.getEndOfCheckInPeriod());
+        Log.i(TAG, String.format("Scheduled Checkin (%dm:%ds) from now.", baseDiff.getMinute(), baseDiff.getSecond()));
+        Log.i(TAG, String.format("Allowed Checkin Period is (%dm:%ds) - (%dm:%ds) from now.",
+                startDiff.getMinute(), startDiff.getSecond(), endDiff.getMinute(), endDiff.getSecond()));
     }
 
 }

@@ -21,6 +21,10 @@ public class ReminderReciever  extends BroadcastReceiver{
     @Override
     public void onReceive(Context context, Intent intent) {
         Log.i(TAG,"Reminder Alarm Broadcast recieved");
-        //CheckInManager.showReminder((Activity)context);//TODO fix displaying content, throws exception
+        Intent showReminder = new Intent(context,MainActivity.class);
+        showReminder.setClass(context,MainActivity.class);
+        showReminder.setAction("com.sabre.tripsafe.showReminder");
+        showReminder.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);//flag to allow our activity to be started
+        context.startActivity(showReminder);
     }
 }
