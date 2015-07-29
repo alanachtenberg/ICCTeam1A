@@ -20,6 +20,10 @@ public class TextAlert implements Alert {
         return enabled;
     }
 
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
     @Override
     public int getThreshold() {
         return threshold;
@@ -33,6 +37,10 @@ public class TextAlert implements Alert {
     @Override
     public void setEnabled(boolean enabled) {
         this.enabled = enabled;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
 
     @Override

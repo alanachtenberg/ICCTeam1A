@@ -15,6 +15,10 @@ public class EmailAlert implements Alert {
         return alertType;
     }
 
+    public String getEmailAddress() {
+        return emailAddress;
+    }
+
     @Override
     public boolean getEnabled() {
         return enabled;
@@ -26,8 +30,13 @@ public class EmailAlert implements Alert {
     }
 
     @Override
-    public void setAlertType(AlertType alertType) {
-        this.alertType = alertType;
+    public void setAlertType(AlertType newAlertType) {
+        if (alertType != newAlertType)
+            this = (EmailAlert) Alerts.castAlert(this, newAlertType);
+    }
+
+    public void setEmailAddress(String emailAddress) {
+        this.emailAddress = emailAddress;
     }
 
     @Override

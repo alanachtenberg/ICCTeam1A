@@ -5,11 +5,6 @@ package com.sabre.tripsafe.alerts;
  */
 interface Alert {
 
-    enum AlertType {
-        NULL, EMAIL, TEXT
-    }
-
-
     AlertType alertType = AlertType.NULL;
     boolean enabled = false;
     int threshold = -1;

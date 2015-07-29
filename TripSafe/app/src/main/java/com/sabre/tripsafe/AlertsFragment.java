@@ -39,12 +39,7 @@ public class AlertsFragment extends Fragment {
         view = inflater.inflate(R.layout.fragment_alerts, container, false);
 
         alertsListView = (ListView) view.findViewById(R.id.alertsListView);
-        alertsListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                selectItem(position);
-            }
-        });
+        alertsListView.setOnItemClickListener(null);
         alertsListView.setAdapter(new ArrayAdapter<String>(
                 alertsListView.getContext(),
                 android.R.layout.simple_list_item_1,
@@ -52,6 +47,40 @@ public class AlertsFragment extends Fragment {
                 new String[]{
                         "item 1",
                         "item 2",
+                        "item 3",
+                        "item 3",
+                        "item 3",
+                        "item 3",
+                        "item 3",
+                        "item 3",
+                        "item 3",
+                        "item 3",
+                        "item 3",
+                        "item 3",
+                        "item 3",
+                        "item 3",
+                        "item 3",
+                        "item 3",
+                        "item 3",
+                        "item 3",
+                        "item 3",
+                        "item 3",
+                        "item 3",
+                        "item 3",
+                        "item 3",
+                        "item 3",
+                        "item 3",
+                        "item 3",
+                        "item 3",
+                        "item 3",
+                        "item 3",
+                        "item 3",
+                        "item 3",
+                        "item 3",
+                        "item 3",
+                        "item 3",
+                        "item 3",
+                        "item 3",
                         "item 3",
                         "item 4"
                 }
