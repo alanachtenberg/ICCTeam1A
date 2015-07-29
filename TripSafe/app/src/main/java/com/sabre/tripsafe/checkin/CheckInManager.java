@@ -88,7 +88,7 @@ public class CheckInManager {
     }
 
     private static void createReminderEvent(Calendar calendar) {
-        ReminderEvent event = new ReminderEvent(calendar);
+        ReminderEvent event = new ReminderEvent(calendar,graceBeforePref,graceAfterPref);
         Intent intent = new Intent(ReminderReciever.INTENT_STRING);
         PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 0, intent, 0);
         alarmManager.setExact(AlarmManager.RTC_WAKEUP, event.getAdjustedCalendar().getTimeInMillis(), pendingIntent);
