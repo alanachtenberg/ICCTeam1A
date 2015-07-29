@@ -11,6 +11,14 @@ public class BasicAlert implements Alert {
 
     public BasicAlert() {}
 
+    public BasicAlert(boolean enabled, int threshold) {
+        this.enabled = enabled;
+        if (threshold > 0)
+            this.threshold = threshold;
+        else
+            this.threshold = 1;
+    }
+
     public BasicAlert(Alert alert) {
         alertType = AlertType.BASIC;
         enabled = alert.getEnabled();

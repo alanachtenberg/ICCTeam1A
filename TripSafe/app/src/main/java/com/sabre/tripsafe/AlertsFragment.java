@@ -5,9 +5,10 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+
+import com.sabre.tripsafe.alerts.*;
 
 /**
  * Created by rsitisr on 2015-07-27.
@@ -40,49 +41,18 @@ public class AlertsFragment extends Fragment {
 
         alertsListView = (ListView) view.findViewById(R.id.alertsListView);
         alertsListView.setOnItemClickListener(null);
-        alertsListView.setAdapter(new ArrayAdapter<String>(
+        alertsListView.setAdapter(new ArrayAdapter<BasicAlert>(
                 alertsListView.getContext(),
                 android.R.layout.simple_list_item_1,
                 android.R.id.text1,
-                new String[]{
-                        "item 1",
-                        "item 2",
-                        "item 3",
-                        "item 3",
-                        "item 3",
-                        "item 3",
-                        "item 3",
-                        "item 3",
-                        "item 3",
-                        "item 3",
-                        "item 3",
-                        "item 3",
-                        "item 3",
-                        "item 3",
-                        "item 3",
-                        "item 3",
-                        "item 3",
-                        "item 3",
-                        "item 3",
-                        "item 3",
-                        "item 3",
-                        "item 3",
-                        "item 3",
-                        "item 3",
-                        "item 3",
-                        "item 3",
-                        "item 3",
-                        "item 3",
-                        "item 3",
-                        "item 3",
-                        "item 3",
-                        "item 3",
-                        "item 3",
-                        "item 3",
-                        "item 3",
-                        "item 3",
-                        "item 3",
-                        "item 4"
+                new BasicAlert[] {
+                        new BasicAlert(true, 4),
+                        new BasicAlert(false, 3),
+                        new BasicAlert(true, 5),
+                        new BasicAlert(true, 3),
+                        new BasicAlert(true, 23),
+                        new BasicAlert(true, 13),
+                        new BasicAlert(true, 5)
                 }
         ));
         alertsListView.setItemChecked(selectedAlertIdx, true);
