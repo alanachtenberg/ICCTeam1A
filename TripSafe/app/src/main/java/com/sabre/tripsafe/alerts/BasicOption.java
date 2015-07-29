@@ -6,19 +6,21 @@ import android.view.View;
 /**
  * Created by rsitisr on 2015-07-28.
  */
-public class BasicAlert extends View implements Alert {
+public class BasicOption extends View implements Option {
 
-    private AlertType alertType;
+    private OptionType optionType;
     private boolean enabled;
     private int threshold;
 
-    public BasicAlert(Context context) {
+    public BasicOption(Context context, boolean enabled, int threshold) {
         super(context);
+        this.enabled = enabled;
+        this.threshold = threshold;
     }
 
     @Override
-    public AlertType getAlertType() {
-        return alertType;
+    public OptionType getOptionType() {
+        return optionType;
     }
 
     @Override

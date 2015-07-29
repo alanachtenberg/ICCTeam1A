@@ -9,7 +9,6 @@ import android.support.v4.widget.DrawerLayout;
 import android.view.Menu;
 
 import com.sabre.tripsafe.checkin.CheckInManager;
-import com.sabre.tripsafe.checkin.receivers.ReminderReciever;
 import com.sabre.tripsafe.preferences.SettingsFragment;
 
 
@@ -55,7 +54,7 @@ public class MainActivity extends Activity
                 fragment=SettingsFragment.newInstance();//TODO replace with schedule fragment
                 break;
             case 2:
-                fragment=AlertsFragment.newInstance();
+                fragment= OptionsFragment.newInstance();
                 break;
             case 3:
                 fragment=SettingsFragment.newInstance();

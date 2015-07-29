@@ -3,24 +3,24 @@ package com.sabre.tripsafe.alerts;
 /**
  * Created by rsitisr on 2015-07-28.
  */
-public class TextAlert extends BasicAlert {
+public class TextOption extends BasicOption {
 
-    private AlertType alertType;
+    private OptionType OPTION_TYPE;
     private boolean enabled;
     private int threshold;
     private String phoneNumber;
 
-    public TextAlert() {
-        alertType = AlertType.TEXT;
+    public TextOption() {
+        OPTION_TYPE = OptionType.TEXT;
         enabled = false;
         threshold = 1;
         phoneNumber = "";
     }
 
-    public TextAlert(Alert alert) {
-        alertType = AlertType.TEXT;
-        enabled = alert.getEnabled();
-        threshold = alert.getThreshold();
+    public TextOption(Option option) {
+        OPTION_TYPE = OptionType.TEXT;
+        enabled = option.getEnabled();
+        threshold = option.getThreshold();
         phoneNumber = "";
     }
 

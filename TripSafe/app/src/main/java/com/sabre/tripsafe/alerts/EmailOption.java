@@ -3,24 +3,24 @@ package com.sabre.tripsafe.alerts;
 /**
  * Created by rsitisr on 2015-07-28.
  */
-public class EmailAlert extends BasicAlert {
+public class EmailOption extends BasicOption {
 
-    private AlertType alertType;
+    private OptionType OPTION_TYPE;
     private boolean enabled;
     private int threshold;
     private String emailAddress;
 
-    public EmailAlert() {
-        alertType = AlertType.EMAIL;
+    public EmailOption() {
+        OPTION_TYPE = OptionType.EMAIL;
         enabled = false;
         threshold = 1;
         emailAddress = "";
     }
 
-    public EmailAlert(Alert alert) {
-        alertType = AlertType.EMAIL;
-        enabled = alert.getEnabled();
-        threshold = alert.getThreshold();
+    public EmailOption(Option option) {
+        OPTION_TYPE = OptionType.EMAIL;
+        enabled = option.getEnabled();
+        threshold = option.getThreshold();
         emailAddress = "";
     }
 
