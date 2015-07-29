@@ -1,28 +1,19 @@
 package com.sabre.tripsafe.alerts;
 
+import android.content.Context;
+import android.view.View;
+
 /**
  * Created by rsitisr on 2015-07-28.
  */
-public class BasicAlert implements Alert {
+public class BasicAlert extends View implements Alert {
 
     private AlertType alertType;
     private boolean enabled;
     private int threshold;
 
-    public BasicAlert() {}
-
-    public BasicAlert(boolean enabled, int threshold) {
-        this.enabled = enabled;
-        if (threshold > 0)
-            this.threshold = threshold;
-        else
-            this.threshold = 1;
-    }
-
-    public BasicAlert(Alert alert) {
-        alertType = AlertType.BASIC;
-        enabled = alert.getEnabled();
-        threshold = alert.getThreshold();
+    public BasicAlert(Context context) {
+        super(context);
     }
 
     @Override
