@@ -35,7 +35,7 @@ public class CheckInManager {
     private static int graceBeforePref = 0;
 
     private static HashMap<String,ReminderEvent> reminderEvents = new HashMap<String,ReminderEvent>();//reminder events and missed events share an ID, no need to use two priority queues
-    private static PriorityQueue<MissedEvent> missedEvents = new PriorityQueue<MissedEvent>(0, new EventComparator());
+    private static PriorityQueue<MissedEvent> missedEvents = new PriorityQueue<MissedEvent>(10, new EventComparator());
 
 
     private static void LoadContext(Activity activity) {
@@ -84,13 +84,16 @@ public class CheckInManager {
             for (MissedEvent missedEvent : missedEvents) {
                 Time diff = Time.getDifference(checkInTime, missedEvent.getBaseCalendar());
                 if ((diff.getMinute() * 60 + diff.getSecond()) > graceBeforePref) {//since priority queue sorts earliest events first, we stop looking when the checkIn time is more than the maximum allowed seconds before
+                    Log.w(TAG,String.format("Attempted check in more than maximum seconds(%d) before next scheduled Checkin, checkin ignored",graceBeforePref));
                     break;
                 }
                 if (missedEvent.isCheckInAllowed(checkInTime)) {
                     logCheckInSuccessful(missedEvent);
                     ReminderEvent reminderEvent = reminderEvents.get(missedEvent.getIdString());
-                    cancelEvent(reminderEvent);
+                    cancelEvent(reminderEvent);//notify alarm manager event is no longer valid
                     cancelEvent(missedEvent);
+                    missedEvents.remove(missedEvent);//remove from queue
+                    reminderEvents.remove(reminderEvent);//clean up mem
                 }
             }
         } finally {
@@ -133,7 +136,7 @@ public class CheckInManager {
     }
 
     private static void logCheckInSuccessful(MissedEvent event) {
-        Log.i(TAG, String.format("Checkin successful for Checkin id=%d",event.getId()));
+        Log.i(TAG, String.format("Checkin successful for Checkin ID=%d",event.getId()));
     }
 
 }

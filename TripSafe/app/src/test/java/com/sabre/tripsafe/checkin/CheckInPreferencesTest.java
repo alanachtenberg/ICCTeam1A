@@ -65,10 +65,10 @@ public class CheckInPreferencesTest {
         for (int i = 0; i < VALID_EMAILS.length; ++i) {
             String email = VALID_EMAILS[i];
             String phone = VALID_PHONES[i];
-            assertEquals(true, checkInPreferences.setEmailAddress(email));
-            assertEquals(true, checkInPreferences.setPhoneNumber(phone));
-            assertEquals(email, checkInPreferences.getEmailAddress());
-            assertEquals(email, checkInPreferences.getPhoneNumber());
+            assertEquals(true, checkInPreferences.addEmailAddress(email));
+            assertEquals(true, checkInPreferences.addPhoneNumber(phone));
+            assertEquals(email, checkInPreferences.getEmailAddresses()[i]);
+            assertEquals(phone, checkInPreferences.getPhoneNumbers()[i]);
         }
     }
 
@@ -77,10 +77,10 @@ public class CheckInPreferencesTest {
         for (int i = 0; i < INVALID_EMAILS.length; ++i) {
             String email = INVALID_EMAILS[i];
             String phone = INVALID_PHONES[i];
-            assertEquals(false, checkInPreferences.setEmailAddress(email));
-            assertEquals(false, checkInPreferences.setPhoneNumber(phone));
-            assertNull(checkInPreferences.getEmailAddress());
-            assertNull(checkInPreferences.getPhoneNumber());
+            assertEquals(false, checkInPreferences.addEmailAddress(email));
+            assertEquals(false, checkInPreferences.addPhoneNumber(phone));
+            assertEquals(0,checkInPreferences.getEmailAddresses().length);
+            assertEquals(0,checkInPreferences.getPhoneNumbers().length);
         }
     }
 

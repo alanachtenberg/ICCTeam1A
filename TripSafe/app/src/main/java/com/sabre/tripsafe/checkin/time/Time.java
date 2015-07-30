@@ -21,24 +21,24 @@ public class Time {
     public Time(int m, int s) {
         minute = m;
         second = s;
-        if (!validate()){
+        /*if (!validate()){
             minute=-1;
             second=-1;
-        }
+        }*/
     }
 
-    private boolean validate() {
+    /*private boolean validate() {
         if (0 > minute || minute > 59) {
             Log.e(MainActivity.TAG, String.format("Invalid time set, minute is out of range. value =%d", minute));
             return false;
         }
         if (0 > second || second > 59) {
-            Log.e(MainActivity.TAG, String.format("Invalid time set, second is out of range. value=%d", second));
+            Log.w(MainActivity.TAG, String.format("Invalid time set, second is out of range. value=%d", second));
             return false;
         }
         return true;
     }
-
+*/
     public int getMinute(){
         return minute;
     }

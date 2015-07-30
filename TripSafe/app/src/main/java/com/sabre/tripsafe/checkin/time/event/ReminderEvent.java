@@ -19,7 +19,9 @@ public class ReminderEvent extends AbstractCheckInEvent {
 
     @Override
     public Calendar getAdjustedCalendar() {
-        return checkInPeriod.start;
+        Calendar adjusted = (Calendar)getBaseCalendar().clone();
+        adjusted.add(Calendar.SECOND,-3);
+        return adjusted;
     }
 
     /*

@@ -3,13 +3,13 @@ package com.sabre.tripsafe.alerts;
 /**
  * Created by rsitisr on 2015-07-28.
  */
-interface Alert {
+interface Option {
 
-    AlertType alertType = AlertType.BASIC;
+    OptionType OPTION_TYPE = OptionType.BASIC;
     boolean enabled = false;
     int threshold = 1;
 
-    AlertType getAlertType();
+    OptionType getOptionType();
     boolean getEnabled();
     int getThreshold();
 
