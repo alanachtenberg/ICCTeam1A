@@ -16,6 +16,7 @@ public class MissedEvent extends AbstractCheckInEvent {
     private CheckInPreferences preferences;
     public static String EMAIL_KEY="CHECK_IN_PREFERENCES_EMAIL";
     public static String PHONE_KEY="CHECK_IN_PREFERENCES_PHONE";
+    public static String TIME_KEY="CHECK_IN_TIME_PREFERENCE";
     public MissedEvent(Calendar calendar, int gracePeriodBefore, int gracePeriodAfter,
                        CheckInPreferences preferences) throws IllegalArgumentException {
         super(calendar, gracePeriodBefore, gracePeriodAfter);
@@ -49,6 +50,7 @@ public class MissedEvent extends AbstractCheckInEvent {
             Intent intent = new Intent(MissedCheckinReciever.INTENT_STRING);
             intent.putExtra(EMAIL_KEY,preferences.getEmailAddresses());
             intent.putExtra(PHONE_KEY,preferences.getPhoneNumbers());
+            intent.putExtra(TIME_KEY,getBaseCalendar());
             pendingIntent = PendingIntent.getBroadcast(context, 0, intent, 0);
         } else {
             throw new IllegalStateException("Error, Attempt to create multiple Intents, " +
