@@ -84,13 +84,16 @@ public class CheckInManager {
             for (MissedEvent missedEvent : missedEvents) {
                 Time diff = Time.getDifference(checkInTime, missedEvent.getBaseCalendar());
                 if ((diff.getMinute() * 60 + diff.getSecond()) > graceBeforePref) {//since priority queue sorts earliest events first, we stop looking when the checkIn time is more than the maximum allowed seconds before
+                    Log.w(TAG,String.format("Attempted check in more than maximum seconds(%d) before next scheduled Checkin, checkin ignored",graceBeforePref));
                     break;
                 }
                 if (missedEvent.isCheckInAllowed(checkInTime)) {
                     logCheckInSuccessful(missedEvent);
                     ReminderEvent reminderEvent = reminderEvents.get(missedEvent.getIdString());
-                    cancelEvent(reminderEvent);
+                    cancelEvent(reminderEvent);//notify alarm manager event is no longer valid
                     cancelEvent(missedEvent);
+                    missedEvents.remove(missedEvent);//remove from queue
+                    reminderEvents.remove(reminderEvent);//clean up mem
                 }
             }
         } finally {

@@ -76,8 +76,7 @@ public class DeveloperFragment extends Fragment {
         checkIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Calendar now=Calendar.getInstance();
-                CheckInManager.updateEventsOnCheckIn(getActivity(),now);
+                CheckInManager.updateEventsOnCheckIn(getActivity(),Calendar.getInstance());
             }
         });
 
