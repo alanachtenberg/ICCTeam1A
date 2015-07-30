@@ -9,15 +9,15 @@ import com.sabre.tripsafe.R;
 /**
  * Created by rsitisr on 2015-07-28.
  */
-public class BasicOption extends RelativeLayout implements Option {
+public class BasicOption implements Option {
 
     private OptionType optionType;
     private boolean enabled;
     private int threshold;
 
-    public static BasicOption inflate(ViewGroup parent) {
-        BasicOption option = (BasicOption) LayoutInflater.from(parent.getContext()).inflate(R.layout.view_basic_option, parent, false);
-        return option;
+    public BasicOption(boolean enabled, int threshold) {
+        this.enabled = enabled;
+        this.threshold = threshold;
     }
 
     @Override
