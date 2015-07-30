@@ -1,7 +1,11 @@
 package com.sabre.tripsafe.checkin.time.event;
 
+import android.app.PendingIntent;
+import android.content.Context;
+import android.content.Intent;
+
 import com.sabre.tripsafe.checkin.CheckInPreferences;
-import com.sabre.tripsafe.checkin.time.Period;
+import com.sabre.tripsafe.checkin.receivers.MissedCheckinReciever;
 
 import java.util.Calendar;
 
@@ -33,5 +37,20 @@ public class MissedEvent extends AbstractCheckInEvent {
     @Override
     public Calendar getAdjustedCalendar() {
         return checkInPeriod.end;
+    }
+
+    /*
+    *Creates a pending intent to start MissedCheckInReciever, Only creates once
+    */
+    @Override
+    public PendingIntent createPendingIntent(Context context) {
+        if (pendingIntent == null) {
+            Intent intent = new Intent(MissedCheckinReciever.INTENT_STRING);
+            pendingIntent = PendingIntent.getBroadcast(context, 0, intent, 0);
+        } else {
+            throw new IllegalStateException("Error, Attempt to create multiple Intents, " +
+                    "MissedEvent should only have a single Intent associated with it");
+        }
+        return pendingIntent;
     }
 }
