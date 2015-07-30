@@ -26,6 +26,7 @@ public class DeveloperFragment extends Fragment {
     private View view;
     private Button showReminderButton;
     private Button scheduleCheckIn;
+    private Button checkIn;
 
     public static DeveloperFragment newInstance() {
         DeveloperFragment fragment = new DeveloperFragment();
@@ -67,6 +68,16 @@ public class DeveloperFragment extends Fragment {
                 oneMinuteFromNow.add(Calendar.MINUTE,1);
                 CheckInPreferences preferences = new CheckInPreferences(new Time(0,59),new Period(now,oneMinuteFromNow),true);
                 CheckInManager.createCheckInEvents(getActivity(), preferences);
+            }
+        });
+
+        checkIn = (Button) view.findViewById(R.id.developer_test_checkin);
+
+        checkIn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Calendar now=Calendar.getInstance();
+                CheckInManager.updateEventsOnCheckIn(getActivity(),now);
             }
         });
 
