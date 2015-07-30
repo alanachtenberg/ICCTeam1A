@@ -49,13 +49,13 @@ public class HomeFragment extends Fragment {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_developer, container, false);
 
-        showReminderButton = (Button) view.findViewById(R.id.developer_show_reminder);
+        /*showReminderButton = (Button) view.findViewById(R.id.developer_show_reminder);
         showReminderButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 CheckInManager.showReminder(getActivity());
             }
-        });
+        });*/
 
         scheduleCheckIn = (Button) view.findViewById(R.id.developer_test_schedule_checkin);
 
