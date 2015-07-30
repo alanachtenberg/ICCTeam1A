@@ -35,7 +35,7 @@ public class CheckInManager {
     private static int graceBeforePref = 0;
 
     private static HashMap<String,ReminderEvent> reminderEvents = new HashMap<String,ReminderEvent>();//reminder events and missed events share an ID, no need to use two priority queues
-    private static PriorityQueue<MissedEvent> missedEvents = new PriorityQueue<MissedEvent>(0, new EventComparator());
+    private static PriorityQueue<MissedEvent> missedEvents = new PriorityQueue<MissedEvent>(10, new EventComparator());
 
 
     private static void LoadContext(Activity activity) {
@@ -133,7 +133,7 @@ public class CheckInManager {
     }
 
     private static void logCheckInSuccessful(MissedEvent event) {
-        Log.i(TAG, String.format("Checkin successful for Checkin id=%d",event.getId()));
+        Log.i(TAG, String.format("Checkin successful for Checkin ID=%d",event.getId()));
     }
 
 }
