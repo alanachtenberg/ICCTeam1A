@@ -7,6 +7,7 @@ import com.sabre.tripsafe.checkin.time.Period;
 import com.sabre.tripsafe.checkin.time.Time;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.regex.Pattern;
 
@@ -17,12 +18,11 @@ import java.util.regex.Pattern;
 * Multiple CheckInPrefernces can exist and each can have multiple Checkins associated with them.
  */
 public class CheckInPreferences {
-
-    private String emailAddress;
-    private String phoneNumber;
     private boolean reminderEnabled;
     private Period period;
     private Time checkInTime;
+    private ArrayList<String> emails = new ArrayList<String>();
+    private ArrayList<String> phones = new ArrayList<String>();
 
 
     public CheckInPreferences(Time checkInTime, Period period, boolean reminderEnabled) {
@@ -31,9 +31,9 @@ public class CheckInPreferences {
         this.reminderEnabled = reminderEnabled;
     }
 
-    public boolean setEmailAddress(String emailAddress) {
+    public boolean addEmailAddress(String emailAddress) {
         if (validateEmail(emailAddress)) {
-            this.emailAddress = emailAddress;
+            emails.add(emailAddress);
             return true;
         }
         System.out.println(String.format("Attempt to set invalid email address. value=%s", emailAddress));
@@ -41,22 +41,23 @@ public class CheckInPreferences {
         return false;
     }
 
-    public String getEmailAddress() {
-        return emailAddress;
+    public String[] getEmailAddresses() {
+        Object[] array=emails.toArray();
+        return Arrays.copyOf(array, array.length, String[].class);
     }
 
-    public boolean setPhoneNumber(String phoneNumber) {
+    public boolean addPhoneNumber(String phoneNumber) {
         if (validatePhone(phoneNumber)) {
-            this.phoneNumber = emailAddress;
+            phones.add(phoneNumber);
             return true;
         }
         System.out.println( String.format("Attempt to set invalid phone number. value=%s", phoneNumber));
-        phoneNumber = null;
         return false;
     }
 
-    public String getPhoneNumber() {
-        return phoneNumber;
+    public String[] getPhoneNumbers() {
+        Object[] array=phones.toArray();
+        return Arrays.copyOf(array, array.length, String[].class);
     }
 
     public Time getCheckInTime() {

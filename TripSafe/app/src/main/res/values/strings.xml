@@ -14,8 +14,11 @@
     <string name="action_settings">Settings</string>
 
     <!--Preferences Summaries-->
-    <string name="grace_before">Seconds before scheduled time that check-in can be confirmed</string>
-    <string name="grace_after">Seconds after scheduled time that check-in can be confirmed</string>
-    <string name="finger_checkin">Fingerprint to check-in with OK status</string>
-    <string name="finger_emergency">Fingerprint to signal an emergency with a false check-in</string>
+    <string name="user_name">Name to use when sending alerts.</string>
+    <string name="alt_contact">Alternate method where you could be reached in event you miss a Check-in. ex. Hotel phone#</string>
+    <string name="grace_before">Seconds before scheduled time that Check-in can be confirmed</string>
+    <string name="grace_after">Seconds after scheduled time that Check-in can be confirmed</string>
+    <string name="passphrase_checkin">Passphrase to use for Check-in</string>
+    <string name="passphrase_emergency">Passphrase to signal an emergency with a false Check-in</string>
+
 </resources>

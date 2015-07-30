@@ -2,6 +2,7 @@ package com.sabre.tripsafe;
 
 import android.app.Fragment;
 import android.os.Bundle;
+import android.telephony.SmsManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,6 +27,8 @@ public class DeveloperFragment extends Fragment {
     private View view;
     private Button showReminderButton;
     private Button scheduleCheckIn;
+    private Button checkIn;
+    private Button sendText;
 
     public static DeveloperFragment newInstance() {
         DeveloperFragment fragment = new DeveloperFragment();
@@ -69,6 +72,25 @@ public class DeveloperFragment extends Fragment {
                 CheckInManager.createCheckInEvents(getActivity(), preferences);
             }
         });
+
+        checkIn = (Button) view.findViewById(R.id.developer_test_checkin);
+
+        checkIn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                CheckInManager.updateEventsOnCheckIn(getActivity(), Calendar.getInstance());
+            }
+        });
+
+        sendText = (Button) view.findViewById(R.id.developer_test_phone);
+
+        sendText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SmsManager.getDefault().sendTextMessage("phone number to test",null,"Hello World, I am a SMS message",null,null);
+            }
+        });
+
 
         return view;
     }
