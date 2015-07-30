@@ -9,16 +9,13 @@ import java.util.Calendar;
  */
 public class ReminderEvent extends AbstractCheckInEvent {
 
-    public ReminderEvent(Calendar calendar) {
-        super(calendar);
+
+    public ReminderEvent(Calendar calendar, int gracePeriodBefore, int gracePeriodAfter) {
+        super(calendar, gracePeriodBefore, gracePeriodAfter);
     }
 
     @Override
-    protected Calendar createAdjustedCalendar() {
-        Calendar calendar = (Calendar) getBaseCalendar().clone();
-        calendar.add(Calendar.SECOND, -3);
-        return calendar;
+    public Calendar getAdjustedCalendar() {
+        return checkInPeriod.start;
     }
-
-
 }

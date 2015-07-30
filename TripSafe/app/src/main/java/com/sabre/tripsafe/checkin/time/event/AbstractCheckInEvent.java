@@ -1,5 +1,7 @@
 package com.sabre.tripsafe.checkin.time.event;
 
+import com.sabre.tripsafe.checkin.time.Period;
+
 import java.util.Calendar;
 
 /**
@@ -9,14 +11,29 @@ public abstract class AbstractCheckInEvent {
 
     private long id = 0;
     private String idString = "";
+    private Calendar baseCalendar;
 
-    private Calendar calendar;
-    private Calendar adjustedCalendar;
+    private int gracePeriodBefore = 0;
+    private int gracePeriodAfter = 0;
 
-    protected AbstractCheckInEvent(Calendar calendar) {
-        this.calendar = calendar;
-        this.adjustedCalendar = createAdjustedCalendar();
+    protected Period checkInPeriod;
+
+    protected AbstractCheckInEvent(Calendar calendar, int gracePeriodBefore, int gracePeriodAfter) {
+        if (gracePeriodBefore < 0)
+            throw new IllegalArgumentException("gracePeriodBefore must be a positive number");
+        if (gracePeriodAfter < 0)
+            throw new IllegalArgumentException("gracePeriodAfter must be a positive number");
+        this.baseCalendar = calendar;
         id = calendar.getTimeInMillis();
+        checkInPeriod = createCheckInPeriod();
+    }
+
+    private Period createCheckInPeriod(){
+        Calendar start = (Calendar)getBaseCalendar().clone();
+        start.add(Calendar.SECOND,-gracePeriodBefore);//negative to change time to before the base
+        Calendar end = (Calendar)getBaseCalendar().clone();
+        end.add(Calendar.SECOND, gracePeriodAfter);//negative to change time to before the base
+        return  new Period(start,end);
     }
 
     public long getId() {
@@ -28,13 +45,9 @@ public abstract class AbstractCheckInEvent {
     }
 
     public Calendar getBaseCalendar() {
-        return calendar;
+        return baseCalendar;
     }
 
-    public Calendar getAdjustedCalendar() {
-        return adjustedCalendar;
-    }
-
-    protected abstract Calendar createAdjustedCalendar();
+    protected abstract Calendar getAdjustedCalendar();
 
 }
