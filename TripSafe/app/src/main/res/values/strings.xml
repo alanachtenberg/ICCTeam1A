@@ -14,6 +14,8 @@
     <string name="action_settings">Settings</string>
 
     <!--Preferences Summaries-->
+    <string name="user_name">Name to use when sending alerts.</string>
+    <string name="alt_contact">Alternate method where you could be reached in event you miss a Check-in. ex. Hotel phone#</string>
     <string name="grace_before">Seconds before scheduled time that Check-in can be confirmed</string>
     <string name="grace_after">Seconds after scheduled time that Check-in can be confirmed</string>
     <string name="passphrase_checkin">Passphrase to use for Check-in</string>
