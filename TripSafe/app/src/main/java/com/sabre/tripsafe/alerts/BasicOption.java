@@ -1,11 +1,5 @@
 package com.sabre.tripsafe.alerts;
 
-import android.view.LayoutInflater;
-import android.view.ViewGroup;
-import android.widget.RelativeLayout;
-
-import com.sabre.tripsafe.R;
-
 /**
  * Created by rsitisr on 2015-07-28.
  */
@@ -21,12 +15,15 @@ public class BasicOption implements Option {
     }
 
     @Override
+    public void doAlert() {}
+
+    @Override
     public OptionType getOptionType() {
         return optionType;
     }
 
     @Override
-    public boolean getEnabled() {
+    public boolean isEnabled() {
         return enabled;
     }
 

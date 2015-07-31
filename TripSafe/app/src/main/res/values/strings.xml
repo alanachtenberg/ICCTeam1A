@@ -2,9 +2,8 @@
     <string name="app_name">TripSafe</string>
 
     <string name="title_home">Home</string>
-    <string name="title_schedule">Schedule Check In</string>
+    <string name="title_schedule">Schedule Check-In</string>
     <string name="title_settings">Settings</string>
-    <string name="title_alerts">Alerts</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>

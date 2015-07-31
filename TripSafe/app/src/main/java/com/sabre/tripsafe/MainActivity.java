@@ -48,18 +48,15 @@ public class MainActivity extends Activity
         Fragment fragment= null;
         switch (position){
             case 0:
-                fragment=HomeFragment.newInstance();//TODO replace with home fragment
+                fragment=HomeFragment.newInstance();
                 break;
             case 1:
-                fragment=SettingsFragment.newInstance();//TODO replace with schedule fragment
+                fragment= SchedulingFragment.newInstance();
                 break;
             case 2:
-                fragment= OptionsFragment.newInstance();
-                break;
-            case 3:
                 fragment=SettingsFragment.newInstance();
                 break;
-            case 4:
+            case 3:
                 fragment=DeveloperFragment.newInstance();
                 break;
         }
@@ -79,11 +76,8 @@ public class MainActivity extends Activity
                 mTitle = getString(R.string.title_schedule);
                 break;
             case 3:
-                mTitle = getString(R.string.title_alerts);
-            case 4:
                 mTitle = getString(R.string.title_settings);
-                break;
-            case 5:
+            case 4:
                 mTitle = "Developer Tools";
                 break;
         }
