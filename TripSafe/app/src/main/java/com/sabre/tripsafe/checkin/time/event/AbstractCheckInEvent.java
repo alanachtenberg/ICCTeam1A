@@ -1,5 +1,8 @@
 package com.sabre.tripsafe.checkin.time.event;
 
+import android.app.PendingIntent;
+import android.content.Context;
+
 import com.sabre.tripsafe.checkin.time.Period;
 
 import java.util.Calendar;
@@ -17,8 +20,11 @@ public abstract class AbstractCheckInEvent {
     private int gracePeriodAfter = 0;
 
     protected Period checkInPeriod;
+    protected PendingIntent pendingIntent;//intent associated with alarm manager.
 
     protected AbstractCheckInEvent(Calendar calendar, int gracePeriodBefore, int gracePeriodAfter) {
+        this.gracePeriodBefore = gracePeriodBefore;
+        this.gracePeriodAfter = gracePeriodAfter;
         if (gracePeriodBefore < 0)
             throw new IllegalArgumentException("gracePeriodBefore must be a positive number");
         if (gracePeriodAfter < 0)
@@ -28,12 +34,12 @@ public abstract class AbstractCheckInEvent {
         checkInPeriod = createCheckInPeriod();
     }
 
-    private Period createCheckInPeriod(){
-        Calendar start = (Calendar)getBaseCalendar().clone();
-        start.add(Calendar.SECOND,-gracePeriodBefore);//negative to change time to before the base
-        Calendar end = (Calendar)getBaseCalendar().clone();
+    private Period createCheckInPeriod() {
+        Calendar start = (Calendar) getBaseCalendar().clone();
+        start.add(Calendar.SECOND, -gracePeriodBefore);//negative to change time to before the base
+        Calendar end = (Calendar) getBaseCalendar().clone();
         end.add(Calendar.SECOND, gracePeriodAfter);//negative to change time to before the base
-        return  new Period(start,end);
+        return new Period(start, end);
     }
 
     public long getId() {
@@ -48,6 +54,12 @@ public abstract class AbstractCheckInEvent {
         return baseCalendar;
     }
 
+    public PendingIntent getPendingIntent() {
+        return pendingIntent;
+    }
+
     protected abstract Calendar getAdjustedCalendar();
+
+    protected abstract PendingIntent createPendingIntent(Context context);
 
 }

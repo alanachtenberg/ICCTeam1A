@@ -1,25 +1,28 @@
 package com.sabre.tripsafe.alerts;
 
+import android.view.LayoutInflater;
+import android.view.ViewGroup;
+import android.widget.RelativeLayout;
+
+import com.sabre.tripsafe.R;
+
 /**
  * Created by rsitisr on 2015-07-28.
  */
-public class BasicAlert implements Alert {
+public class BasicOption implements Option {
 
-    private AlertType alertType;
+    private OptionType optionType;
     private boolean enabled;
     private int threshold;
 
-    public BasicAlert() {}
-
-    public BasicAlert(Alert alert) {
-        alertType = AlertType.BASIC;
-        enabled = alert.getEnabled();
-        threshold = alert.getThreshold();
+    public BasicOption(boolean enabled, int threshold) {
+        this.enabled = enabled;
+        this.threshold = threshold;
     }
 
     @Override
-    public AlertType getAlertType() {
-        return alertType;
+    public OptionType getOptionType() {
+        return optionType;
     }
 
     @Override

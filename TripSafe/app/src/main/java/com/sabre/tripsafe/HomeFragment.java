@@ -64,7 +64,7 @@ public class HomeFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Fragment frag = null;
-                frag = AlertsFragment.newInstance();
+                frag = OptionsFragment.newInstance();
 
                 FragmentManager fragmentManager = getFragmentManager();
                 fragmentManager.beginTransaction()

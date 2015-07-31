@@ -2,6 +2,21 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
+    <PreferenceCategory android:title="Alert Information">
+        <EditTextPreference
+            android:key="user_name_preference"
+            android:title="Name"
+            android:inputType="text"
+            android:summary="@string/user_name"
+            />
+        <EditTextPreference
+            android:key="alt_contact_preference"
+            android:title="Alt Contact Method"
+            android:inputType="text"
+            android:summary="@string/alt_contact"
+            />
+    </PreferenceCategory>
+
     <PreferenceCategory android:title="Check-in Grace Period">
         <com.sabre.tripsafe.preferences.NumberPreference
             android:key="grace_before_preference"
@@ -43,15 +58,15 @@
     <PreferenceCategory android:title="Security">
         <EditTextPreference
             android:key="finger_preference"
-            android:title="Normal Print"
-            android:inputType="text"
-            android:summary="@string/finger_checkin"
+            android:title="Passphrase"
+            android:inputType="textPassword"
+            android:summary="@string/passphrase_checkin"
             />
         <EditTextPreference
             android:key="finger_emergency_preference"
-            android:title="Emergency Print"
-            android:inputType="text"
-            android:summary="@string/finger_emergency"
+            android:title="Emergency Passphrase"
+            android:inputType="textPassword"
+            android:summary="@string/passphrase_emergency"
             />
 
     </PreferenceCategory>
