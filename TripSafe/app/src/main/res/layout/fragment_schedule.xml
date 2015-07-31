@@ -3,9 +3,45 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <Button
+        android:id="@+id/start_date"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="Set Trip Start Date"
+        />
+
+    <Button
+        android:id="@+id/end_date"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="Set Trip End Date"
+        />
+
+    <Button
+        android:id="@+id/time"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="Check-In Time"
+        />
+
     <ListView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@android:id/list"
         android:listSelector="@android:color/transparent" />
+
+    <Button
+        android:id="@+id/add_info"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="Add Option"
+        />
+    <Button
+        android:id="@+id/submit_info"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="Submit Check-In"
+        />
 </LinearLayout>
