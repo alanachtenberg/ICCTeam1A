@@ -70,6 +70,7 @@ public class HomeFragment extends Fragment {
                 fragmentManager.beginTransaction()
                             .replace(R.id.container, frag)
                             .commit();
+                NavigationDrawer.
 
             }
         });
