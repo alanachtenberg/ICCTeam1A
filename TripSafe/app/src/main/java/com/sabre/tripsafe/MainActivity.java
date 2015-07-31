@@ -49,7 +49,7 @@ public class MainActivity extends Activity
         Fragment fragment= null;
         switch (position){
             case 0:
-                fragment= SettingsFragment.newInstance();//TODO replace with home fragment
+                fragment=HomeFragment.newInstance();//TODO replace with home fragment
                 break;
             case 1:
                 fragment=SettingsFragment.newInstance();//TODO replace with schedule fragment
