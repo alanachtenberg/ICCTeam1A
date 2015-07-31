@@ -53,16 +53,14 @@ public class SchedulingFragment extends ListFragment {
         optionsListView.setAdapter(new OptionsAdapter(
                 optionsListView.getContext(),
                 R.layout.fragment_schedule,
-                new LinkedList<Option>(Arrays.asList( new BasicOption(true, 4),
-                                                           new BasicOption(false, 3),
-                                                           new BasicOption(true, 5),
-                                                           new BasicOption(true, 3),
-                                                           new BasicOption(false, 1),
-                                                           new BasicOption(true, 2),
-                                                           new BasicOption(true, 5))
-
+                new LinkedList<Option>(Arrays.asList(
+                        new TextOption(true, 3, "3432436745"),
+                        new EmailOption(false, 1, "someone@sabre.com"),
+                        new TextOption(true, 1, "3076532810"),
+                        new EmailOption(true, 2, "needhelp@sabre.com"),
+                        new TextOption(true, 2, "9755434557")
                 )
-        ));
+        )));
         optionsListView.setItemChecked(selectedOptionIdx, true);
 
         return view;
@@ -79,29 +77,7 @@ public class SchedulingFragment extends ListFragment {
         }
 
         public View getView(int position, View convertView, ViewGroup parent) {
-            final int p = position;
-            LayoutInflater inflater = (LayoutInflater) mCtx
-                    .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            View rowView = inflater.inflate(R.layout.view_basic_option, parent, false);
-            final CheckBox checkBox = (CheckBox) rowView.findViewById(R.id.checkBox);
-            final TextView textView = (TextView) rowView.findViewById(R.id.textView);
-            final Button button = (Button) rowView.findViewById(R.id.button);
-            button.setText(Integer.toString(options.get(p).getThreshold()));
-            checkBox.setChecked(options.get(p).isEnabled());
-            textView.setText("Enabled: " + options.get(p).isEnabled() + "; Threshold: " + options.get(p).getThreshold());
-            checkBox.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    CheckBox checkBox = (CheckBox) v.findViewById(R.id.checkBox);
-                    if (checkBox.isChecked())
-                        options.get(p).setEnabled(true);
-                    else
-                        options.get(p).setEnabled(false);
-                    textView.setText("Enabled: " + options.get(p).isEnabled() + "; Threshold: " + options.get(p).getThreshold());
-                }
-            });
-
-            return rowView;
+            return options.get(position).getView(position, convertView, parent, mCtx);
         }
     }
 

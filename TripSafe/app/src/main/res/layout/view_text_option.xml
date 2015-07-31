@@ -22,4 +22,21 @@
         android:layout_gravity="center_vertical"
         tools:ignore="HardcodedText" />
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Text:"
+        android:id="@+id/textView"
+        android:layout_gravity="center_vertical" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:id="@+id/editText"
+        android:layout_gravity="center_vertical|right"
+        android:layout_weight="0.5"
+        android:inputType="phone" />
+
 </LinearLayout>
