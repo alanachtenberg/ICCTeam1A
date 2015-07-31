@@ -9,11 +9,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.sabre.tripsafe.checkin.CheckInManager;
-import com.sabre.tripsafe.checkin.CheckInPreferences;
-import com.sabre.tripsafe.checkin.time.Period;
-import com.sabre.tripsafe.checkin.time.Time;
-
-import java.util.Calendar;
 
 /**
  * Created by LeBat on 7/30/2015.
@@ -54,7 +49,14 @@ public class HomeFragment extends Fragment {
         scheduleCheckIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                CheckInManager.showReminder(getActivity());
+                Fragment frag = null;
+                frag = SchedulingFragment.newInstance();
+
+                FragmentManager fragmentManager = getFragmentManager();
+                fragmentManager.beginTransaction()
+                        .replace(R.id.container, frag)
+                        .commit();
+
             }
         });
 
@@ -63,14 +65,7 @@ public class HomeFragment extends Fragment {
         CheckIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Fragment frag = null;
-                frag = OptionsFragment.newInstance();
-
-                FragmentManager fragmentManager = getFragmentManager();
-                fragmentManager.beginTransaction()
-                            .replace(R.id.container, frag)
-                            .commit();
-
+                CheckInManager.showReminder(getActivity());
             }
         });
 

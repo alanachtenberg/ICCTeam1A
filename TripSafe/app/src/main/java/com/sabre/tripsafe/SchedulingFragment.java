@@ -1,6 +1,5 @@
 package com.sabre.tripsafe;
 
-import android.app.Fragment;
 import android.app.ListFragment;
 import android.content.Context;
 import android.os.Bundle;
@@ -11,7 +10,6 @@ import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.ListView;
 import android.widget.NumberPicker;
-import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.sabre.tripsafe.alerts.*;
@@ -23,15 +21,15 @@ import java.util.List;
 /**
  * Created by rsitisr on 2015-07-27.
  */
-public class OptionsFragment extends ListFragment {
+public class SchedulingFragment extends ListFragment {
 
     private View view;
 
     private int selectedOptionIdx;
     private ListView optionsListView;
 
-    public static OptionsFragment newInstance() {
-        OptionsFragment fragment = new OptionsFragment();
+    public static SchedulingFragment newInstance() {
+        SchedulingFragment fragment = new SchedulingFragment();
         Bundle args = new Bundle();
         fragment.setArguments(args);
         return fragment;
@@ -47,13 +45,13 @@ public class OptionsFragment extends ListFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        view = inflater.inflate(R.layout.fragment_options, container, false);
+        view = inflater.inflate(R.layout.fragment_schedule, container, false);
 
         optionsListView = (ListView) view.findViewById(android.R.id.list);
         optionsListView.setOnItemClickListener(null);
         optionsListView.setAdapter(new OptionsAdapter(
                 optionsListView.getContext(),
-                R.layout.fragment_options,
+                R.layout.fragment_schedule,
                 new LinkedList<BasicOption>(Arrays.asList( new BasicOption(true, 4),
                                                            new BasicOption(false, 3),
                                                            new BasicOption(true, 5),
