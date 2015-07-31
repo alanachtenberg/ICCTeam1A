@@ -1,6 +1,7 @@
 package com.sabre.tripsafe;
 
 import android.app.Fragment;
+import android.app.FragmentManager;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,11 +16,11 @@ import com.sabre.tripsafe.checkin.time.Time;
 import java.util.Calendar;
 
 /**
- * Created by Alan on 7/24/2015.
+ * Created by LeBat on 7/30/2015.
  */
 
 /*
- A fragment to hookup code directly to UI for quick and dirty testing/debugging
+ The home fragment.
  */
 public class HomeFragment extends Fragment {
 
@@ -27,8 +28,8 @@ public class HomeFragment extends Fragment {
     private Button scheduleCheckIn;
     private Button CheckIn;
 
-    public static DeveloperFragment newInstance() {
-        DeveloperFragment fragment = new DeveloperFragment();
+    public static HomeFragment newInstance() {
+        HomeFragment fragment = new HomeFragment();
         Bundle args = new Bundle();
         fragment.setArguments(args);
         return fragment;
@@ -47,26 +48,29 @@ public class HomeFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        view = inflater.inflate(R.layout.fragment_developer, container, false);
+        view = inflater.inflate(R.layout.fragment_home, container, false);
 
-        /*showReminderButton = (Button) view.findViewById(R.id.developer_show_reminder);
-        showReminderButton.setOnClickListener(new View.OnClickListener() {
+        scheduleCheckIn = (Button) view.findViewById(R.id.schedule_checkin);
+        scheduleCheckIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 CheckInManager.showReminder(getActivity());
             }
-        });*/
+        });
 
-        scheduleCheckIn = (Button) view.findViewById(R.id.developer_test_schedule_checkin);
+        CheckIn = (Button) view.findViewById(R.id.check_in);
 
-        scheduleCheckIn.setOnClickListener(new View.OnClickListener() {
+        CheckIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Calendar now=Calendar.getInstance();
-                Calendar oneMinuteFromNow = (Calendar)now.clone();
-                oneMinuteFromNow.add(Calendar.MINUTE,1);
-                CheckInPreferences preferences = new CheckInPreferences(new Time(0,59),new Period(now,oneMinuteFromNow),true);
-                CheckInManager.createCheckInEvents(getActivity(), preferences);
+                Fragment frag = null;
+                frag = OptionsFragment.newInstance();
+
+                FragmentManager fragmentManager = getFragmentManager();
+                fragmentManager.beginTransaction()
+                            .replace(R.id.container, frag)
+                            .commit();
+
             }
         });
 
